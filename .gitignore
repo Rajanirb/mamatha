@@ -1,0 +1,24 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.env
+*.env.txt
+!.env.example
+
+# Local runtime data and generated audio
+/data/
+/temp/
+/scratch/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+/response.mp3
+/response.wav
+/static/response_*
+/static/speech_*
+/Mindmate admin login details.txt
+/.vscode/

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>MAMATHA — Your Companion</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="MAMATHA - AI Based Mental Health Companion Application with Indian Language Support">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============================================================ */
+    /* 🎨 TOKENS — shared identity with the login page                */
+    /* ============================================================ */
+    :root {
+      --ink: #23293a;
+      --ink-soft: #5c6579;
+      --ink-faint: #96a0b3;
+      --paper: #faf6ef;
+      --surface: #ffffff;
+      --surface-soft: #f4efe4;
+      --line: #e8e1d2;
+
+      --sage: #7c9885;
+      --sage-deep: #5f7a68;
+      --sage-tint: #eaf0e9;
+
+      --rose: #c98b93;
+      --rose-deep: #a9707b;
+      --rose-tint: #f7ebec;
+
+      --twilight: #5b6c8f;
+      --twilight-deep: #414f6e;
+      --twilight-tint: #eaeef5;
+
+      --gold: #c9a46a;
+      --amber: #d98e4a;
+
+      --shadow-sm: 0 1px 3px rgba(35, 41, 58, .06);
+      --shadow-md: 0 10px 30px rgba(35, 41, 58, .08);
+      --shadow-lg: 0 24px 60px rgba(35, 41, 58, .14);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 26px;
+      --radius-pill: 999px;
+
+      --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(55% 45% at 10% 6%, rgba(124, 152, 133, .13), transparent 60%),
+        radial-gradient(45% 40% at 95% 10%, rgba(201, 139, 147, .12), transparent 60%),
+        var(--paper);
+      color: var(--ink);
+      padding: 22px 24px 48px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--twilight);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================ */
+    /* 🕊 TOP BAR                                                     */
+    /* ============================================================ */
+    .topbar {
+      max-width: 1400px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 32px;
+      letter-spacing: 0.01em;
+    }
+
+    .topbar-side {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-logo-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      object-fit: contain;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+      padding: 3px;
+    }
+
+    .breathe-dot {
+      position: relative;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--sage);
+      flex-shrink: 0;
+    }
+
+    .breathe-dot::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--sage);
+      opacity: .55;
+      animation: breatheRing 4s ease-in-out infinite;
+    }
+
+    @keyframes breatheRing {
+
+      0%,
+      100% {
+        transform: scale(.85);
+        opacity: .55;
+      }
+
+      50% {
+        transform: scale(1.55);
+        opacity: 0;
+      }
+    }
+
+    .lang-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      padding: 9px 16px 9px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    #languageSelect {
+      border: none;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+    }
+
+    .mamatha-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 1.2em; /* Scales with parent */
+    }
+
+    /* ============================================================ */
+    /* ✨ HERO GREETING                                               */
+    /* ============================================================ */
+    .title-inside {
+      max-width: 760px;
+      margin: 6px auto 28px;
+      text-align: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: clamp(24px, 3.4vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+
+    /* ============================================================ */
+    /* 📐 MAIN LAYOUT                                                 */
+    /* ============================================================ */
+    .body-cont {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .vid-input-cont {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ---- Companion card ---- */
+    .main-cont {
+      width: 340px;
+      min-width: 300px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #vid-res {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(60% 60% at 50% 40%, var(--sage-tint), transparent 70%),
+        var(--surface-soft);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+    }
+
+    /* breathing ring behind the companion — the signature motif */
+    #vid-res::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      border: 1.5px solid var(--sage);
+      opacity: .35;
+      animation: breatheRing2 4.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes breatheRing2 {
+
+      0%,
+      100% {
+        transform: scale(.94);
+        opacity: .4;
+      }
+
+      50% {
+        transform: scale(1.06);
+        opacity: .12;
+      }
+    }
+
+    #ai-avatar-img {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #ai-avatar-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Idle state — a slow, barely-there breathing motion so the doctor
+       always reads as present, never frozen, even between replies. */
+    @keyframes idleBreathe {
+
+      0%,
+      100% {
+        transform: scale(1) translateY(0);
+      }
+
+      50% {
+        transform: scale(1.012) translateY(-1.5px);
+      }
+    }
+
+    #avatar-wrapper {
+      animation: idleBreathe 5.5s ease-in-out infinite;
+    }
+
+    #vid-res.speaking #avatar-wrapper {
+      animation: none;
+    }
+
+    /* Speaking state */
+    #vid-res.speaking {
+      box-shadow: 0 0 0 3px var(--sage-tint) inset;
+    }
+
+    #vid-res.speaking #ai-avatar-img {
+      animation: avatarFloat 2s ease-in-out infinite;
+    }
+
+    @keyframes avatarFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .sound-waves {
+      display: none;
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 3px;
+      align-items: flex-end;
+      height: 26px;
+      z-index: 5;
+      background: rgba(35, 41, 58, .55);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(4px);
+    }
+
+    #vid-res.speaking .sound-waves {
+      display: flex;
+    }
+
+    .sound-wave-bar {
+      width: 4px;
+      height: 6px;
+      background: var(--sage);
+      border-radius: 3px;
+      animation: soundWave 0.6s ease-in-out infinite;
+    }
+
+    @keyframes soundWave {
+
+      0%,
+      100% {
+        height: 6px;
+      }
+
+      50% {
+        height: 20px;
+      }
+    }
+
+    .sound-wave-bar:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .sound-wave-bar:nth-child(2) {
+      animation-delay: 0.1s;
+      height: 12px;
+    }
+
+    .sound-wave-bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .sound-wave-bar:nth-child(4) {
+      animation-delay: 0.05s;
+      height: 16px;
+    }
+
+    .sound-wave-bar:nth-child(5) {
+      animation-delay: 0.15s;
+    }
+
+    .sound-wave-bar:nth-child(6) {
+      animation-delay: 0.25s;
+      height: 10px;
+    }
+
+    .sound-wave-bar:nth-child(7) {
+      animation-delay: 0.08s;
+    }
+
+    .speaking-label {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(124, 152, 133, .92);
+      color: white;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      z-index: 5;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    #vid-res.speaking .speaking-label {
+      display: block;
+    }
+
+    #feelingQuestion {
+      text-align: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink-soft);
+    }
+
+    #message {
+      padding: 13px 15px;
+      font-size: 14.5px;
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+      border-radius: var(--radius-sm);
+      outline: none;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink);
+      resize: vertical;
+      min-height: 52px;
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+    }
+
+    #message:focus {
+      border-color: var(--twilight);
+      background: var(--surface);
+      box-shadow: 0 0 0 4px rgba(91, 108, 143, .12);
+    }
+
+    button {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background var(--ease), transform 0.15s ease, box-shadow .2s var(--ease);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    #send-btn {
+      width: 100%;
+      background: var(--twilight);
+      color: #fff;
+    }
+
+    #send-btn:hover {
+      background: var(--twilight-deep);
+      box-shadow: var(--shadow-md);
+    }
+
+    #voice-btn {
+      width: 100%;
+      background: var(--sage-deep);
+      color: #fff;
+    }
+
+    #voice-btn:hover {
+      background: var(--sage);
+      box-shadow: var(--shadow-md);
+    }
+
+    #start-record-btn {
+      width: 100%;
+      background: var(--rose-deep);
+      color: #fff;
+    }
+
+    #start-record-btn:hover {
+      background: var(--rose);
+      box-shadow: var(--shadow-md);
+    }
+
+    #start-cam-btn {
+      width: 100%;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    #start-cam-btn:hover {
+      background: #384056;
+      box-shadow: var(--shadow-md);
+    }
+
+    .doctorSurveyBtn {
+      background: var(--twilight);
+      color: #fff;
+      width: 100%;
+    }
+
+    .doctorSurveyBtn:hover {
+      background: var(--twilight-deep);
+      box-shadow: var(--shadow-md);
+    }
+
+    #speech-status {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--ink-faint);
+      text-align: center;
+      min-height: 16px;
+    }
+
+    /* ---- Chat / response panel ---- */
+    #response {
+      font-size: 14.5px;
+      color: var(--ink);
+      white-space: pre-line;
+      display: flex;
+      flex-direction: column;
+      width: 420px;
+      min-width: 300px;
+      flex: 1;
+      max-width: 520px;
+      height: 60vh;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      gap: 10px;
+      scroll-behavior: smooth;
+    }
+
+    #response::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #response::-webkit-scrollbar-thumb {
+      background: var(--line);
+      border-radius: 8px;
+    }
+
+    .messageIn {
+      text-align: start;
+      width: fit-content;
+      max-width: 78%;
+      padding: 12px 16px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
+      margin-right: auto;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      word-break: break-word;
+      line-height: 1.6;
+    }
+
+    .AIreply {
+      padding: 12px 16px;
+      border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+      background: linear-gradient(135deg, var(--twilight), var(--twilight-deep));
+      color: #f4f1ea;
+      margin: 4px 0;
+      margin-left: auto;
+      max-width: 78%;
+      word-break: break-word;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      border: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ---- Camera / stress card ---- */
+    .cam-cont {
+      display: flex;
+      flex-direction: column;
+      width: 280px;
+      min-width: 240px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      gap: 10px;
+    }
+
+    #userCam {
+      width: 100%;
+      height: 160px;
+      border: 3px solid var(--surface-soft);
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      background: var(--ink);
+    }
+
+    .stress-bar-container {
+      width: 100%;
+      height: 12px;
+      background: var(--surface-soft);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .stress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--sage), var(--gold), var(--amber));
+      border-radius: var(--radius-pill);
+      transition: width 0.5s ease;
+    }
+
+    .stress-text {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    #userDet {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      font-size: 13px;
+      gap: 4px;
+    }
+
+    #userDetailsTitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+
+    #userDet p {
+      color: var(--ink-soft);
+    }
+
+    /* ---- Guided intake panel ---- */
+    #intake-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 24px;
+      margin: 34px auto 0;
+      width: 50%;
+      max-width: 700px;
+    }
+
+    #guidedIntakeTitle {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    #intake-question {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      min-height: 44px;
+      padding: 10px;
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      color: var(--ink-soft);
+    }
+
+    #intake-answer {
+      width: 100%;
+      padding: 11px 13px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface-soft);
+      outline: none;
+      transition: border-color .2s var(--ease), background .2s var(--ease);
+    }
+
+    #intake-answer:focus {
+      border-color: var(--twilight);
+      background: var(--surface);
+    }
+
+    #intake-pass-btn,
+    #intake-submit-btn,
+    #intake-mic-btn {
+      width: 100%;
+      background: var(--surface-soft);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    #intake-pass-btn:hover,
+    #intake-mic-btn:hover {
+      background: var(--line);
+    }
+
+    #intake-submit-btn {
+      background: var(--twilight);
+      color: #fff;
+      border: none;
+    }
+
+    #intake-submit-btn:hover {
+      background: var(--twilight-deep);
+    }
+
+    #intake-help {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+
+    #intake-progress {
+      margin-top: 8px;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+    }
+
+    /* ---- Stress dashboard ---- */
+    #stressDashboard {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 24px;
+      margin: 24px auto 0;
+      width: 50%;
+      max-width: 700px;
+    }
+
+    #stressDashboardTitle {
+      text-align: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    #stressDashboard>div:first-of-type {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      background: var(--sage-tint);
+    }
+
+    #avgStressLabel {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+    }
+
+    #avgStressValue {
+      font-family: 'Inter', sans-serif;
+      color: var(--sage-deep);
+      font-weight: 700;
+    }
+
+    #stressDashboard>div:last-of-type {
+      width: 100%;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: var(--surface-soft);
+    }
+
+    #recentStressLabel {
+      margin-top: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+
+    #recentStressList {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    /* ---- History ---- */
+    .historyCont {
+      width: 100%;
+      max-width: 1400px;
+      margin: 30px auto 0;
+      padding: 18px;
+      max-height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    #historyTitle {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    /* ============================================================ */
+    /* 📱 RESPONSIVE                                                  */
+    /* ============================================================ */
+    @media (max-width: 1024px) {
+      .body-cont {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .vid-input-cont {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-cont,
+      #response,
+      .cam-cont {
+        width: 100%;
+        max-width: 520px;
+      }
+
+      #intake-panel,
+      #stressDashboard {
+        width: 100%;
+        max-width: 520px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 14px 36px;
+      }
+
+      .title-inside {
+        font-size: 22px;
+      }
+    }
+    .logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--rose-deep);
+  text-decoration: none;
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.logout-btn:hover {
+  background: var(--rose-tint);
+  box-shadow: var(--shadow-md);
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-side">
+      <img src="/static/iiitk1.png" alt="IIITDM Kurnool" class="header-logo-img">
+      <div class="wordmark"><span class="breathe-dot"></span> MAMATHA</div>
+    </div>
+    <div class="topbar-side">
+      <div class="lang-pill">
+        <span aria-hidden="true">🌐</span>
+        <select id="languageSelect">
+      <optgroup label="Indian Languages">
+
+          <option value="en">English</option>
+          <option value="hi">Hindi (हिन्दी)</option>
+          <option value="bn">Bengali (বাংলা)</option>
+          <option value="te">Telugu (తెలుగు)</option>
+          <option value="mr">Marathi (मराठी)</option>
+          <option value="ta">Tamil (தமிழ்)</option>
+          <option value="ur">Urdu (اردو)</option>
+          <option value="gu">Gujarati (ગુજરાતી)</option>
+          <option value="kn">Kannada (ಕನ್ನಡ)</option>
+          <option value="ml">Malayalam (മലയാളം)</option>
+          <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+          <option value="or">Odia (ଓଡ଼ିଆ)</option>
+      </optgroup>
+      <optgroup label="Tribal / Adivasi Languages">
+        <option value="santali">Santali</option>
+        <option value="gondi">Gondi</option>
+        <option value="kurukh">Kurukh</option>
+        <option value="mundari">Mundari</option>
+        <option value="ho">Ho</option>
+        <option value="korku">Korku</option>
+        <option value="bhili">Bhili</option>
+        <option value="kui">Kui</option>
+        <option value="kuvi">Kuvi</option>
+        <option value="koya">Koya</option>
+        <option value="bodo">Bodo</option>
+        <option value="mising">Mising</option>
+        <option value="karbi">Karbi</option>
+        <option value="garo">Garo</option>
+        <option value="khasi">Khasi</option>
+        <option value="mizo">Mizo</option>
+        <option value="kokborok">Kokborok</option>
+        <option value="lepcha">Lepcha</option>
+        <option value="ao">Ao</option>
+        <option value="angami">Angami</option>
+        <option value="lotha">Lotha</option>
+        <option value="konyak">Konyak</option>
+        <option value="tangkhul">Tangkhul</option>
+      </optgroup>
+      </select>
+      </div>
+      <img src="/static/trigun_logo.png" alt="Trigun Logo" class="header-logo-img">
+      <a href="/logout" class="logout-btn">🚪 Logout</a>
+    </div>
+  </div>
+
+  <h2 class="title-inside" id="appTitle">Welcome back. I'm here, whenever you're ready to talk.</h2>
+
+  <div class="body-cont">
+    <div class="vid-input-cont">
+      <div class="main-cont">
+        <div class="vid" id="vid-res">
+          <div id="avatar-wrapper"
+            style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <img src="/static/doctor_female.png" alt="AI Companion" id="ai-avatar-img"
+              style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="/static/doctor_female_talking.png" alt="" id="ai-avatar-talking" aria-hidden="true"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.06s linear; z-index: 2; pointer-events: none;">
+            <video id="ai-avatar-video" playsinline
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; z-index: 3;"></video>
+          </div>
+
+          <div class="sound-waves" id="soundWaves">
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+            <div class="sound-wave-bar"></div>
+          </div>
+
+          <div class="speaking-label" id="speakingLabel">Speaking</div>
+        </div>
+        <h2 id="feelingQuestion">How are you feeling today?</h2>
+        <form id="chat-form">
+          <textarea name="message" id="message" placeholder="Enter your thoughts.." required></textarea>
+          <div><button type="submit" id="send-btn">Send</button></div>
+        </form>
+        <button id="voice-btn">Speak</button>
+        <button id="start-record-btn">Analyze My Voice Stress</button>
+        <p id="speech-status"></p>
+      </div>
+
+      <div id="response"></div>
+
+      <div class="cam-cont" id="cam-cont">
+        <video id="userCam" autoplay playsinline muted></video>
+        <button id="start-cam-btn">Start Camera</button>
+        <div class="stress-bar-container">
+          <div class="stress-bar" id="stress-bar"></div>
+        </div>
+        <div class="stress-text" id="stress-text">Stress: 0%</div>
+        <div id="userDet">
+          <h3 id="userDetailsTitle">Your details</h3>
+          <p id="userName">Name: </p>
+          <p id="userEmail">Email: </p>
+          <p id="userAge">Age: </p>
+          <p id="userLocation">Location: </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="intake-panel">
+    <h3 id="guidedIntakeTitle">A few gentle questions</h3>
+    <div id="intake-question"></div>
+    <div style="display:flex; flex-direction: column; gap:10px; margin-top:10px;">
+      <button id="start-doctor-survey-btn" class="doctorSurveyBtn">Start Doctor Survey</button>
+      <input id="intake-answer" placeholder="Type your answer or click 'Pass'" />
+      <div style="display: flex; gap: 8px; justify-content: space-between;">
+        <button id="intake-pass-btn" type="button" style="width: 100%;">Pass</button>
+        <button id="intake-submit-btn" type="button" style="width: 100%;">Reply</button>
+        <button id="intake-mic-btn" style="width: 100%;">Speak</button>
+      </div>
+    </div>
+    <div id="intake-help">We'll ask a few gentle questions, one at a time. Say "pass" any time you'd rather not answer —
+      that's completely okay.</div>
+    <div id="intake-progress"></div>
+  </div>
+
+  <div id="stressDashboard">
+    <h3 id="stressDashboardTitle">Your Stress Dashboard</h3>
+    <div>
+      <p><b id="avgStressLabel">Average Stress (Today):</b> <span id="avgStressValue">Calculating...</span></p>
+    </div>
+    <div>
+      <h4 id="recentStressLabel">Recent Stress Levels</h4>
+      <div id="recentStressList"></div>
+    </div>
+  </div>
+
+  <div class="historyCont" id="historyCont">
+    <h3 id="historyTitle">History</h3>
+  </div>
+
+  <!-- Externalized script to avoid duplicate handlers and context size limitations -->
+  <script src="/static/app.js"></script>
+</body>
+
+</html>

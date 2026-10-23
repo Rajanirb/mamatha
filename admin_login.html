@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - MAMATHA Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+    <style>
+        :root {
+            --ink: #23293a;
+            --ink-soft: #5c6579;
+            --ink-faint: #96a0b3;
+            --paper: #faf6ef;
+            --surface: #ffffff;
+            --surface-soft: #f4efe4;
+            --line: #e8e1d2;
+
+            --sage: #7c9885;
+            --sage-deep: #5f7a68;
+            --sage-tint: #eaf0e9;
+
+            --rose: #c98b93;
+            --rose-deep: #a9707b;
+            --rose-tint: #f7ebec;
+
+            --twilight: #5b6c8f;
+            --twilight-deep: #414f6e;
+            --twilight-tint: #eaeef5;
+
+            --shadow-sm: 0 1px 3px rgba(35, 41, 58, .06);
+            --shadow-md: 0 10px 30px rgba(35, 41, 58, .08);
+            --shadow-lg: 0 24px 60px rgba(35, 41, 58, .14);
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 26px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(55% 45% at 10% 6%, rgba(124, 152, 133, .12), transparent 60%),
+                radial-gradient(45% 40% at 95% 10%, rgba(201, 139, 147, .10), transparent 60%),
+                var(--paper);
+            color: var(--ink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .login-card {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--line);
+            width: 100%;
+            max-width: 400px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.7rem;
+            color: var(--ink);
+            margin: 0 0 5px 0;
+        }
+        .header p {
+            color: var(--ink-soft);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: var(--surface-soft);
+            color: var(--ink);
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus {
+            border-color: var(--twilight);
+            background: var(--surface);
+            box-shadow: 0 0 0 4px rgba(91, 108, 143, .12);
+        }
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--ink-soft);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .options a { color: var(--twilight); text-decoration: none; }
+        .options a:hover { text-decoration: underline; }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: var(--twilight);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn-submit:hover {
+            background: var(--twilight-deep);
+            box-shadow: var(--shadow-md);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.88rem;
+        }
+        .back-link:hover {
+            color: var(--twilight);
+        }
+        .language-header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--surface);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-sm);
+        }
+        select.lang-selector {
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            background: transparent;
+            color: var(--ink);
+        }
+        #forgot-password-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(35, 41, 58, 0.45);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 400px;
+        }
+        .modal-content h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .error-msg {
+            color: var(--rose-deep);
+            font-size: 0.88rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="language-header">
+        <select id="login-language-selector" class="lang-selector" onchange="setLanguage(this.value)">
+      <optgroup label="Indian Languages">
+
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="te">Telugu</option>
+            <option value="bn">Bengali</option>
+            <option value="mr">Marathi</option>
+            <option value="ta">Tamil</option>
+            <option value="ur">Urdu</option>
+            <option value="gu">Gujarati</option>
+            <option value="kn">Kannada</option>
+            <option value="ml">Malayalam</option>
+            <option value="pa">Punjabi</option>
+            <option value="or">Odia</option>
+      </optgroup>
+      <optgroup label="Tribal / Adivasi Languages">
+        <option value="santali">Santali</option>
+        <option value="gondi">Gondi</option>
+        <option value="kurukh">Kurukh</option>
+        <option value="mundari">Mundari</option>
+        <option value="ho">Ho</option>
+        <option value="korku">Korku</option>
+        <option value="bhili">Bhili</option>
+        <option value="kui">Kui</option>
+        <option value="kuvi">Kuvi</option>
+        <option value="koya">Koya</option>
+        <option value="bodo">Bodo</option>
+        <option value="mising">Mising</option>
+        <option value="karbi">Karbi</option>
+        <option value="garo">Garo</option>
+        <option value="khasi">Khasi</option>
+        <option value="mizo">Mizo</option>
+        <option value="kokborok">Kokborok</option>
+        <option value="lepcha">Lepcha</option>
+        <option value="ao">Ao</option>
+        <option value="angami">Angami</option>
+        <option value="lotha">Lotha</option>
+        <option value="konyak">Konyak</option>
+        <option value="tangkhul">Tangkhul</option>
+      </optgroup>
+      </select>
+    </div>
+
+    <div class="login-card">
+        <div class="header">
+            <h1>Admin Portal</h1>
+            <p>System oversight and management</p>
+        </div>
+        
+        <form id="admin-login-form">
+            <div class="form-group">
+                <label for="email">Admin Email</label>
+                <input type="email" id="email" class="form-control" placeholder="admin@mindmate.com" required>
+            </div>
+            
+            <div class="form-group password-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+            </div>
+
+            <p id="error-msg" class="error-msg"></p>
+
+            <div class="options">
+                <label><input type="checkbox" id="remember"> <span data-i18n="remember_me">Remember me</span></label>
+                <a href="#" onclick="showForgotModal()" data-i18n="forgot_password">Forgot Password?</a>
+            </div>
+            
+            <button type="submit" class="btn-submit" data-i18n="login_admin">Login to Admin</button>
+        </form>
+
+        <a href="/admin_register" class="back-link" style="margin-top: 15px; font-weight: 600;" data-i18n="admin_invite">Have an invite code? Register here</a>
+        <a href="/" class="back-link" data-i18n="back_to_portal">← Back to Portal Selection</a>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal">
+        <div class="modal-content" id="modal-step-1">
+            <h2 style="margin-top:0;" data-i18n="reset_password">Reset Password</h2>
+            <p style="color: var(--ink-soft); font-size: 0.95rem;" data-i18n="reset_desc_admin">Enter your admin email to receive a secure OTP.</p>
+            <input type="email" id="reset-email" class="form-control" placeholder="Enter your email" style="margin-bottom: 15px;">
+            <p id="reset-error" class="error-msg"></p>
+            <button onclick="sendOTP()" class="btn-submit" style="margin-bottom: 10px;" data-i18n="send_otp">Send OTP</button>
+            <button onclick="closeForgotModal()" style="width: 100%; padding: 10px; background: none; border: none; cursor: pointer; color: var(--ink-soft);" data-i18n="cancel">Cancel</button>
+        </div>
+
+        <div class="modal-content" id="modal-step-2" style="display:none;">
+            <h2 style="margin-top:0;" data-i18n="verify_otp">Verify OTP</h2>
+            <p style="color: var(--ink-soft); font-size: 0.95rem;" data-i18n="otp_desc">Check your console/email for the 6-digit OTP.</p>
+            <input type="text" id="otp-code" class="form-control" placeholder="123456" style="margin-bottom: 15px;">
+            <p id="otp-error" class="error-msg"></p>
+            <button onclick="verifyOTP()" class="btn-submit" style="margin-bottom: 10px;" data-i18n="submit_otp">Verify OTP</button>
+            <button onclick="closeForgotModal()" style="width: 100%; padding: 10px; background: none; border: none; cursor: pointer; color: var(--ink-soft);" data-i18n="cancel">Cancel</button>
+        </div>
+
+        <div class="modal-content" id="modal-step-3" style="display:none;">
+            <h2 style="margin-top:0;" data-i18n="new_password">New Password</h2>
+            <input type="password" id="new-password" class="form-control" placeholder="New Password" style="margin-bottom: 15px;">
+            <p id="new-pwd-error" class="error-msg"></p>
+            <button onclick="resetPassword()" class="btn-submit" style="margin-bottom: 10px;" data-i18n="save_password">Save Password</button>
+            <button onclick="closeForgotModal()" style="width: 100%; padding: 10px; background: none; border: none; cursor: pointer; color: var(--ink-soft);" data-i18n="cancel">Cancel</button>
+        </div>
+    </div>
+
+    <script src="/static/i18n.js"></script>
+    <script>
+        let currentResetEmail = '';
+
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const btn = document.querySelector('.toggle-password');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        function showForgotModal() {
+            document.getElementById('forgot-password-modal').style.display = 'flex';
+            document.getElementById('modal-step-1').style.display = 'block';
+            document.getElementById('modal-step-2').style.display = 'none';
+            document.getElementById('modal-step-3').style.display = 'none';
+        }
+
+        function closeForgotModal() {
+            document.getElementById('forgot-password-modal').style.display = 'none';
+        }
+
+        async function sendOTP() {
+            const email = document.getElementById('reset-email').value;
+            const err = document.getElementById('reset-error');
+            if(!email) {
+                err.innerText = "Please enter an email.";
+                err.style.display = 'block';
+                return;
+            }
+            err.style.display = 'none';
+            
+            const res = await fetch('/api/forgot_password', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email: email, role: 'admin' })
+            });
+            const data = await res.json();
+            
+            if(data.success) {
+                currentResetEmail = email;
+                document.getElementById('modal-step-1').style.display = 'none';
+                document.getElementById('modal-step-2').style.display = 'block';
+            } else {
+                err.innerText = data.message;
+                err.style.display = 'block';
+            }
+        }
+
+        async function verifyOTP() {
+            const otp = document.getElementById('otp-code').value;
+            const err = document.getElementById('otp-error');
+            
+            const res = await fetch('/api/verify_otp', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email: currentResetEmail, role: 'admin', otp: otp })
+            });
+            const data = await res.json();
+            
+            if(data.success) {
+                document.getElementById('modal-step-2').style.display = 'none';
+                document.getElementById('modal-step-3').style.display = 'block';
+            } else {
+                err.innerText = data.message;
+                err.style.display = 'block';
+            }
+        }
+
+        async function resetPassword() {
+            const pwd = document.getElementById('new-password').value;
+            const err = document.getElementById('new-pwd-error');
+            
+            const res = await fetch('/api/reset_password', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email: currentResetEmail, role: 'admin', password: pwd })
+            });
+            const data = await res.json();
+            
+            if(data.success) {
+                alert("Password reset successfully. Please login.");
+                closeForgotModal();
+            } else {
+                err.innerText = data.message;
+                err.style.display = 'block';
+            }
+        }
+
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const errorEl = document.getElementById('error-msg');
+            errorEl.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append("email", email);
+            formData.append("password", password);
+
+            try {
+                const res = await fetch('/admin_login', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    window.location.href = '/admin_dashboard';
+                } else {
+                    errorEl.innerText = data.message || 'Login failed';
+                    errorEl.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Admin login request failed:', err);
+                errorEl.innerText = 'Something went wrong. Check the browser console for details.';
+                errorEl.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

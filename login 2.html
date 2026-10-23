@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f8f0">
+  <title>MAMATHA — A little care. A calmer you.</title>
+  <meta name="description" content="Meet Mamatha, your AI and AR based wellbeing companion. Sign in for conversation, voice support, and an emotional wellbeing check-in.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/landing.css">
+</head>
+<body>
+  <a class="skip-link" href="#login-form">Skip to sign in</a>
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-wash"></div>
+    <svg class="ambient-feather feather-left" viewBox="0 0 260 430"><path d="M130 410c-4-77-1-147 10-233M128 329C-2 255 28 68 134 25c111 49 129 229-6 304Z"/><path d="M130 307C28 247 47 93 134 48c91 47 101 191-4 259Z"/><path d="M131 280C57 225 69 115 134 76c69 43 77 145-3 204Z"/><path d="M133 254c-48-39-41-119 2-147 46 29 47 102-2 147Z"/><ellipse cx="135" cy="179" rx="24" ry="42"/><ellipse cx="136" cy="179" rx="10" ry="19"/><path d="m130 351-38-23m37 44 32-30m-32 51-25-13"/></svg>
+    <svg class="ambient-feather feather-right" viewBox="0 0 260 430"><path d="M130 410c-4-77-1-147 10-233M128 329C-2 255 28 68 134 25c111 49 129 229-6 304Z"/><path d="M130 307C28 247 47 93 134 48c91 47 101 191-4 259Z"/><path d="M131 280C57 225 69 115 134 76c69 43 77 145-3 204Z"/><path d="M133 254c-48-39-41-119 2-147 46 29 47 102-2 147Z"/><ellipse cx="135" cy="179" rx="24" ry="42"/><ellipse cx="136" cy="179" rx="10" ry="19"/><path d="m130 351-38-23m37 44 32-30m-32 51-25-13"/></svg>
+    <span class="ambient-dot dot-one"></span><span class="ambient-dot dot-two"></span><span class="ambient-dot dot-three"></span>
+  </div>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="institution">
+        <img src="/static/iiitk1.png" width="53" height="60" alt="IIITDM Kurnool">
+        <div>
+          <p class="institution-name" data-i18n="instituteName">Indian Institute of Information Technology Design and Manufacturing, Kurnool</p>
+          <p class="institution-caption" data-i18n="aiCompanion">AI &amp; AR Based Companion</p>
+        </div>
+      </div>
+      <div class="header-tools">
+        <img class="partner-logo" src="/static/trigun_logo.png" width="49" height="49" alt="Trigun">
+        <div class="language-picker">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>
+          <select id="login-language-selector" class="lang-selector" aria-label="Choose your language" onchange="window.setLanguage ? window.setLanguage(this.value) : null">
+            <optgroup label="Indian Languages">
+          <option value="en" selected>English</option>
+          <option value="hi">Hindi (हिन्दी)</option>
+          <option value="te">Telugu (తెలుగు)</option>
+          <option value="bn">Bengali (বাংলা)</option>
+          <option value="mr">Marathi (मराठी)</option>
+          <option value="ta">Tamil (தமிழ்)</option>
+          <option value="ur">Urdu (اردو)</option>
+          <option value="gu">Gujarati (ગુજરાતી)</option>
+          <option value="kn">Kannada (ಕನ್ನಡ)</option>
+          <option value="ml">Malayalam (മലയാളം)</option>
+          <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+          <option value="or">Odia (ଓଡ଼ିଆ)</option>
+          <option value="bho">Bhojpuri (भोजपुरी)</option>
+        </optgroup>
+        <optgroup label="Tribal / Adivasi Languages">
+          <option value="santali">Santali</option>
+          <option value="gondi">Gondi</option>
+          <option value="kurukh">Kurukh</option>
+          <option value="mundari">Mundari</option>
+          <option value="ho">Ho</option>
+          <option value="korku">Korku</option>
+          <option value="bhili">Bhili</option>
+          <option value="kui">Kui</option>
+          <option value="kuvi">Kuvi</option>
+          <option value="koya">Koya</option>
+          <option value="bodo">Bodo</option>
+          <option value="mising">Mising</option>
+          <option value="karbi">Karbi</option>
+          <option value="garo">Garo</option>
+          <option value="khasi">Khasi</option>
+          <option value="mizo">Mizo</option>
+          <option value="kokborok">Kokborok</option>
+          <option value="lepcha">Lepcha</option>
+          <option value="ao">Ao</option>
+          <option value="angami">Angami</option>
+          <option value="lotha">Lotha</option>
+          <option value="konyak">Konyak</option>
+          <option value="tangkhul">Tangkhul</option>
+        </optgroup>
+
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <main class="welcome-layout">
+      <section class="welcome-story" aria-labelledby="welcome-title">
+        <p class="eyebrow">A moment for yourself</p>
+        <h1 id="welcome-title">A little care.<br>A <em>calmer</em> you.</h1>
+        <p class="welcome-description">Some days, all you need is a little space to be heard. Meet Mamatha, your companion for thoughtful conversations and a more mindful connection with yourself.</p>
+        <div class="companion-notes">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4Z"/><path d="M8 8h8m-8 4h5"/></svg>Talk in your language</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2m3-4v8m4-12v16m4-12v8m3-4h2"/></svg>Voice &amp; emotion support</span>
+        </div>
+        <div class="breathing-moment">
+          <div class="breathing-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18C2 7 9 3 20 3c0 10-3 18-12 15M5 21 16 9"/></svg></div>
+          <div class="breathing-copy">
+            <strong>There is no rush. Just a fresh start.</strong>
+            <p>Take a slow breath. Make yourself at home.</p>
+            <button id="motion-toggle" class="motion-button" type="button" aria-pressed="false">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zm4 0h2v8H7z"/></svg><span id="motion-label">Pause animation</span>
+            </button>
+          </div>
+        </div>
+        <details id="face-check" class="face-check">
+          <summary>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 6 8H3v12h18V8h-3l-2-3Z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span class="face-summary-copy"><strong>Prefer to sign in with your face?</strong><small>Open your camera for a face &amp; wellbeing check-in</small></span>
+            <span class="expand-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="face-check-content">
+            <div class="mode-toggle" role="group" aria-label="Face check mode">
+              <button type="button" id="toggle-lite-mode" class="active" aria-pressed="true" onclick="setAppMode('lite')">Lite · Face sign-in</button>
+              <button type="button" id="toggle-elite-mode" aria-pressed="false" onclick="setAppMode('elite')">Elite · Live check-in</button>
+            </div>
+            <div id="lite-face-panel">
+              <div class="camera-viewport">
+                <div class="camera-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 6 8H3v12h18V8h-3l-2-3Z"/><circle cx="12" cy="13" r="4"/></svg><span data-camera-message>Your camera preview will appear here</span></div>
+                <video id="login-camera" aria-label="Face sign-in camera preview" autoplay muted playsinline></video>
+              </div>
+              <canvas id="login-canvas" hidden></canvas>
+              <div class="camera-results" aria-live="polite">
+                <div class="camera-result" id="lite-identity-box"><small>Registered user</small><p id="login-face-result">Waiting for camera</p></div>
+                <div class="camera-result" id="lite-stress-box"><small>Stress level</small><p id="login-stress-result">—</p><div class="stress-track"><div id="lite-stress-bar"></div></div></div>
+              </div>
+              <button type="button" id="face-login-btn" class="secondary-button" onclick="manualScan('lite')" data-i18n="scanFaceBtn">Scan Face</button>
+            </div>
+            <div id="elite-stress-panel">
+              <div class="camera-viewport">
+                <div class="camera-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 6 8H3v12h18V8h-3l-2-3Z"/><circle cx="12" cy="13" r="4"/></svg><span data-camera-message>Your camera preview will appear here</span></div>
+                <video id="elite-camera" aria-label="Live wellbeing check camera preview" autoplay muted playsinline></video>
+              </div>
+              <canvas id="elite-canvas" hidden></canvas>
+              <div class="camera-results" aria-live="polite">
+                <div class="camera-result" id="elite-identity-box"><small>Registered user</small><p id="elite-face-result">Waiting for camera</p></div>
+                <div class="camera-result" id="elite-stress-box"><small>Live stress level</small><p id="elite-stress-label">—</p><div class="stress-track"><div id="elite-stress-bar"></div></div><p id="elite-emotion-label"></p></div>
+              </div>
+              <button type="button" id="elite-scan-btn" class="secondary-button" onclick="manualScan('elite')">Scan now</button>
+            </div>
+            <p class="camera-note">Allow camera access to use face sign-in. You can also sign in with your email and password.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="auth-card container" aria-label="Your Mamatha account">
+        <div class="portal-toggle" role="group" aria-label="Choose your portal">
+          <button type="button" id="toggle-user-login" class="active" aria-pressed="true" onclick="setPortalMode('user')"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg>Personal account</button>
+          <button type="button" id="toggle-admin-login" aria-pressed="false" onclick="setPortalMode('admin')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg>Admin portal</button>
+        </div>
+        <div class="forms" id="forms">
+          <form class="form" id="login-form" onsubmit="event.preventDefault(); login();" aria-labelledby="login-title">
+            <img class="brand-logo" src="/static/mamatha-logo.jpeg" width="1024" height="559" alt="Mamatha peacock logo" fetchpriority="high">
+            <div class="form-heading">
+              <h2 id="login-title" data-i18n="welcomeBack">Welcome Back</h2>
+              <p>A familiar space. A little more peace of mind.</p>
+            </div>
+            <label class="field" for="login-email"><span data-i18n="email_addr">Email Address</span><input id="login-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
+            <div class="field">
+              <div class="field-heading">
+                <label for="login-password" data-i18n="password">Password</label>
+                <a class="forgot-link" href="#forgot-password-modal" onclick="showForgotPasswordModal(); return false;" data-i18n="forgot_password">Forgot password?</a>
+              </div>
+              <div class="password-field"><input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button class="password-reveal" type="button" data-password-target="login-password" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+            </div>
+            <button class="primary-button" type="submit"><span data-i18n="loginBtn">Login</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+            <button class="toggle-btn" type="button" onclick="showSignup()" data-i18n="dontHaveAccount">Don't have an account? Sign Up</button>
+            <p class="account-note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="10" width="12" height="11" rx="2"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>Your space to pause, reflect, and reconnect.</p>
+          </form>
+          <form class="form" id="signup-form" hidden onsubmit="event.preventDefault(); register();" aria-labelledby="signup-title">
+            <img class="brand-logo" src="/static/mamatha-logo.jpeg" width="1024" height="559" alt="Mamatha peacock logo">
+            <div class="form-heading"><h2 id="signup-title" data-i18n="createAccount">Create Account</h2><p>Your next chapter begins with a little care.</p></div>
+            <div class="signup-grid">
+              <label class="field wide-field" for="signup-name"><span data-i18n="fullName">Full Name</span><input id="signup-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required></label>
+              <label class="field wide-field" for="signup-email"><span data-i18n="email_addr">Email Address</span><input id="signup-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
+              <div class="field wide-field"><label class="field-heading" for="signup-password"><span data-i18n="password">Password</span></label><div class="password-field"><input id="signup-password" name="password" type="password" placeholder="Create a password" autocomplete="new-password" required><button class="password-reveal" type="button" data-password-target="signup-password" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+              <label class="field" for="signup-age"><span data-i18n="ageLabel">Age</span><input id="signup-age" name="age" type="number" placeholder="Your age" required></label>
+              <label class="field" for="signup-alternate-phone"><span data-i18n="altPhone">Alternate Phone Number</span><input id="signup-alternate-phone" name="alternate-phone" type="tel" placeholder="Phone number" autocomplete="tel" required></label>
+              <label class="field wide-field" for="signup-location"><span data-i18n="locationLabel">Location</span><input id="signup-location" name="location" type="text" placeholder="City or town" autocomplete="address-level2" required></label>
+            </div>
+            <div id="signup-face-capture-block" class="signup-camera-block">
+              <p>Add your face to enable face sign-in in Lite mode.</p>
+              <video id="signup-camera" aria-label="Registration camera preview" width="180" autoplay muted playsinline></video>
+              <canvas id="signup-canvas" hidden></canvas>
+              <button class="secondary-button" type="button" onclick="captureSignupFace()" data-i18n="captureFaceBtn">Capture Face</button>
+              <p id="signup-face-status" role="status"></p>
+            </div>
+            <button class="primary-button" type="submit"><span data-i18n="signUpBtn">Sign Up</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+            <button class="toggle-btn" type="button" onclick="showLogin()" data-i18n="alreadyHaveAccount">Already have an account? Login</button>
+          </form>
+        </div>
+        <p class="auth-footer">A little understanding<span aria-hidden="true">·</span>A little everyday care</p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p class="footer-note">Thoughtfully created at IIITDM Kurnool.<br>A companion for your everyday wellbeing.</p>
+      <p class="designed-by"><strong>Designed by</strong>Dr K.Krishna Naik, D.Venkata Ramana Murthy, B.Rekha &amp; B.Rajini</p>
+    </footer>
+  </div>
+
+  <div id="stress-confirm-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="stress-modal-title">
+    <div class="modal-box">
+      <h3 id="stress-modal-title">Your check-in is complete.</h3>
+      <p>Would you like to continue to your companion?</p>
+      <div class="confirm-actions"><button type="button" class="primary-button confirm-yes" onclick="confirmGoToMain()">Yes, continue</button><button type="button" class="secondary-button confirm-no" onclick="confirmStayHere()">Stay here</button></div>
+    </div>
+  </div>
+  <div id="forgot-password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="forgot-modal-title">
+    <form class="modal-box" onsubmit="event.preventDefault(); submitForgotPassword();">
+      <h3 id="forgot-modal-title">A fresh start.</h3>
+      <p>Enter your email and we'll send you a password reset link.</p>
+      <label class="field" for="forgot-email-input"><span data-i18n="email_addr">Email Address</span><input type="email" id="forgot-email-input" name="reset-email" autocomplete="email" placeholder="you@example.com" required></label>
+      <p id="forgot-password-msg" class="form-message" role="status"></p>
+      <button class="primary-button" type="submit">Send reset link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+      <button class="toggle-btn" type="button" onclick="closeForgotPasswordModal()" data-i18n="cancel">Cancel</button>
+    </form>
+  </div>
+  <script>
+    console.log("🔥 MAMATHA LOGIN — face recognition + stress detection in both modes");
+
+    let currentAppMode = 'lite';
+
+    // ─── Forgot password ───────────────────────────────────────
+    function showForgotPasswordModal() {
+      document.getElementById('forgot-password-modal').style.display = 'flex';
+    }
+    function closeForgotPasswordModal() {
+      document.getElementById('forgot-password-modal').style.display = 'none';
+      document.getElementById('forgot-password-msg').innerText = '';
+      document.getElementById('forgot-email-input').value = '';
+    }
+    async function submitForgotPassword() {
+      const email = document.getElementById('forgot-email-input').value;
+      const msg   = document.getElementById('forgot-password-msg');
+      if (!email) { msg.innerText = 'Please enter your email.'; return; }
+      msg.innerText = 'Sending...';
+      try {
+        const res  = await fetch('/forgot_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+        const data = await res.json();
+        msg.innerText = data.message;
+      } catch { msg.innerText = 'Something went wrong. Please try again.'; }
+    }
+
+    // ─── Stress confirmation modal helpers ─────────────────────
+    let _pendingRedirect = null;
+
+    function showStressConfirmModal(redirectUrl) {
+      _pendingRedirect = redirectUrl;
+      document.getElementById('stress-confirm-modal').style.display = 'flex';
+    }
+
+    function confirmGoToMain() {
+      document.getElementById('stress-confirm-modal').style.display = 'none';
+      if (_pendingRedirect) {
+        window.location.replace(_pendingRedirect);
+      }
+    }
+
+    function confirmStayHere() {
+      document.getElementById('stress-confirm-modal').style.display = 'none';
+      _pendingRedirect = null;
+      // User stays on the login page — no redirect, no logout, no refresh.
+    }
+
+    // ─── Portal toggle ─────────────────────────────────────────
+    function setPortalMode(mode) {
+      const userBtn  = document.getElementById('toggle-user-login');
+      const adminBtn = document.getElementById('toggle-admin-login');
+      if (mode === 'admin') {
+        adminBtn.classList.add('active'); userBtn.classList.remove('active');
+        window.location.href = '/admin_login';
+        return;
+      }
+      userBtn.classList.add('active'); adminBtn.classList.remove('active');
+    }
+
+    // ─── App mode toggle (Lite = face, Elite = stress) ─────────
+
+    // ─── Elite stress camera stubs ─────────────────────────────
+    let eliteInterval      = null;
+    let eliteRunning       = false;
+    let autoFaceLoginInterval = null;
+    let faceLoginRunning   = false;
+
+    function startEliteStressCamera() {
+      startCamera('elite-camera').then((ready) => {
+        if (ready && !eliteInterval) {
+          eliteInterval = setInterval(eliteAutoScan, 3000);
+        }
+      });
+    }
+
+    function stopEliteStressCamera() {
+      if (eliteInterval) { clearInterval(eliteInterval); eliteInterval = null; }
+      const v = document.getElementById('elite-camera');
+      if (v && v.srcObject) { v.srcObject.getTracks().forEach(t => t.stop()); v.srcObject = null; }
+      if (v) v.parentElement.querySelector('.camera-placeholder').hidden = false;
+    }
+
+    // ─── App mode toggle ───────────────────────────────────────
+    function setAppMode(mode) {
+      currentAppMode = mode;
+      document.getElementById('toggle-lite-mode').setAttribute('aria-pressed', String(mode === 'lite'));
+      document.getElementById('toggle-elite-mode').setAttribute('aria-pressed', String(mode === 'elite'));
+      const liteBtn          = document.getElementById('toggle-lite-mode');
+      const eliteBtn         = document.getElementById('toggle-elite-mode');
+      const liteFacePanel    = document.getElementById('lite-face-panel');
+      const eliteStressPanel = document.getElementById('elite-stress-panel');
+      const signupFaceBlock  = document.getElementById('signup-face-capture-block');
+
+      if (mode === 'lite') {
+        liteBtn.classList.add('active'); eliteBtn.classList.remove('active');
+        liteFacePanel.style.display    = 'block';
+        eliteStressPanel.style.display = 'none';
+        if (signupFaceBlock) signupFaceBlock.style.display = 'block';
+        stopEliteStressCamera();
+        startFaceLoginCamera();
+      } else {
+        liteBtn.classList.remove('active'); eliteBtn.classList.add('active');
+        liteFacePanel.style.display    = 'none';
+        eliteStressPanel.style.display = 'block';
+        if (signupFaceBlock) signupFaceBlock.style.display = 'none';
+        stopLiteFaceLogin();
+        startEliteStressCamera();
+      }
+    }
+
+    // ─── Form slide helpers ────────────────────────────────────
+    let signupFaceImage = null;
+    let signupFaceEmbedding = null;
+    let loginDetectionInterval = null;
+
+    function showSignup() {
+      document.getElementById('login-form').hidden = true;
+      document.getElementById('signup-form').hidden = false;
+      document.getElementById('face-check').open = false;
+      stopLiteFaceLogin();
+      stopEliteStressCamera();
+      if (currentAppMode === 'lite') startCamera('signup-camera');
+      document.getElementById('signup-name').focus();
+    }
+    function showLogin(moveFocus = true) {
+      document.getElementById('signup-form').hidden = true;
+      document.getElementById('login-form').hidden = false;
+      const signupVideo = document.getElementById('signup-camera');
+      if (signupVideo.srcObject) {
+        signupVideo.srcObject.getTracks().forEach(track => track.stop());
+        signupVideo.srcObject = null;
+      }
+      if (document.getElementById('face-check').open) setAppMode(currentAppMode);
+      if (moveFocus) document.getElementById('login-email').focus();
+    }
+
+    // ─── Register ──────────────────────────────────────────────
+    async function register() {
+      const name           = document.getElementById("signup-name").value;
+      const email          = document.getElementById("signup-email").value;
+      const password       = document.getElementById("signup-password").value;
+      const age            = document.getElementById("signup-age").value;
+      const alternatePhone = document.getElementById("signup-alternate-phone").value;
+      const location       = document.getElementById("signup-location").value;
+
+      if (!name || !email || !password || !age || !alternatePhone || !location)
+        return alert("Please fill all fields");
+
+      if (currentAppMode === 'lite' && !signupFaceImage)
+        return alert("Please capture your face before registering");
+
+      try {
+        const res = await fetch("/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password, age, alternate_phone: alternatePhone, location, image: signupFaceImage || "", embedding: signupFaceEmbedding || "" })
+        });
+        const data = await res.json();
+        alert(data.message);
+        if (!data.success) return;
+
+        if (currentAppMode === 'lite' && signupFaceImage) {
+          await fetch("/register_face_test", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, image: signupFaceImage })
+          });
+        }
+
+        alert("Registration complete! You can now login.");
+        showLogin();
+      } catch (err) {
+        alert("Registration failed: " + err.message);
+      }
+    }
+
+    // ─── Login (password) ──────────────────────────────────────
+    async function login() {
+      const email    = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      try {
+        const res  = await fetch("/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem("user", JSON.stringify(data.user || { name: data.name, email }));
+          window.location.href = "/home";
+        } else {
+          alert(data.message || "Login failed");
+        }
+      } catch (err) {
+        alert("Login failed: " + err.message);
+      }
+    }
+
+    // ─── Generic camera starter ────────────────────────────────
+    async function startCamera(videoId) {
+      const video = document.getElementById(videoId);
+      if (!video) return false;
+      if (video.srcObject && video.srcObject.active) return true;
+      const placeholder = video.parentElement.querySelector('.camera-placeholder');
+      const cameraMessage = placeholder && placeholder.querySelector('[data-camera-message]');
+      try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error('Camera access is unavailable in this browser.');
+        }
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+          audio: false
+        });
+        const stillVisible = videoId === 'signup-camera'
+          ? !document.getElementById('signup-form').hidden
+          : document.getElementById('face-check').open
+            && ((videoId === 'login-camera' && currentAppMode === 'lite')
+              || (videoId === 'elite-camera' && currentAppMode === 'elite'));
+        if (!stillVisible) {
+          stream.getTracks().forEach(track => track.stop());
+          return false;
+        }
+        video.srcObject = stream;
+        await video.play();
+        if (placeholder) placeholder.hidden = true;
+        return true;
+      } catch (err) {
+        if (video.srcObject) {
+          video.srcObject.getTracks().forEach(track => track.stop());
+          video.srcObject = null;
+        }
+        if (placeholder) placeholder.hidden = false;
+        const message = 'Camera unavailable. Allow access in your browser or use email sign-in.';
+        if (cameraMessage) cameraMessage.textContent = message;
+        const resultId = videoId === 'login-camera' ? 'login-face-result'
+          : videoId === 'elite-camera' ? 'elite-face-result' : 'signup-face-status';
+        document.getElementById(resultId).textContent = 'Camera unavailable';
+        console.warn('Camera:', err.message);
+        return false;
+      }
+    }
+
+    // ─── Signup face capture ───────────────────────────────────
+    async function captureSignupFace() {
+      const video  = document.getElementById("signup-camera");
+      const canvas = document.getElementById("signup-canvas");
+      if (!video || !video.videoWidth) { alert("Camera is not ready. Please wait."); return; }
+
+      canvas.width  = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      const image = canvas.toDataURL("image/jpeg", 0.9);
+      signupFaceImage = image;
+
+      const result = document.getElementById("signup-face-status");
+      if (result) { result.innerText = "Verifying face... ⏳"; result.style.color = "var(--clr-primary)"; }
+
+      try {
+        const res      = await fetch("/register_face_test", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image }) });
+        const faceData = await res.json();
+        if (faceData.success) {
+          signupFaceEmbedding = faceData.embedding;
+          if (result) { result.innerText = "Face captured and verified ✓"; result.style.color = "#16a34a"; }
+        } else {
+          signupFaceEmbedding = null;
+          if (result) { result.innerText = "⚠️ " + (faceData.message || "Face not detected"); result.style.color = "#dc2626"; }
+        }
+      } catch { if (result) result.innerText = "Face captured ✓"; }
+    }
+
+    // ─── Shared: call /face_login_with_stress and update UI ───
+    async function callFaceLoginWithStress(videoId, canvasId, mode) {
+      const video  = document.getElementById(videoId);
+      const canvas = document.getElementById(canvasId);
+      if (!video || video.videoWidth === 0 || video.videoHeight === 0) return null;
+
+      canvas.width  = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      const image = canvas.toDataURL("image/jpeg", 0.9);
+
+      const response = await fetch("/face_login_with_stress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image })
+      });
+      return await response.json();
+    }
+
+    // ─── Update the result boxes (shared by Lite and Elite) ───
+    function renderResult(data, faceElemId, stressTextId, stressBarId, emotionId) {
+      const faceEl    = document.getElementById(faceElemId);
+      const stressTxt = document.getElementById(stressTextId);
+      const stressBar = document.getElementById(stressBarId);
+      const emotionEl = emotionId ? document.getElementById(emotionId) : null;
+
+      if (!data) return;
+
+      // Identity
+      if (faceEl) {
+        if (data.success) {
+          faceEl.innerText      = "✅ " + data.name;
+          faceEl.style.color    = "#16a34a";
+        } else {
+          faceEl.innerText      = data.message || "Not recognized";
+          faceEl.style.color    = "#dc2626";
+        }
+      }
+
+      // Stress
+      if (stressTxt && data.stress_score !== null && data.stress_score !== undefined) {
+        const score = Math.round(data.stress_score);
+        const risk  = data.stress_risk || (score > 70 ? "High" : score > 40 ? "Moderate" : "Low");
+        const color = score > 70 ? "#ef4444" : score > 40 ? "#f97316" : "#22c55e";
+
+        stressTxt.innerText   = risk + " (" + score + "%)";
+        stressTxt.style.color = color;
+        if (stressBar) { stressBar.style.width = score + "%"; stressBar.style.background = color; }
+        if (emotionEl && data.emotion) emotionEl.innerText = "Emotion: " + data.emotion;
+      } else if (stressTxt) {
+        stressTxt.innerText = "Stress: —";
+      }
+    }
+
+    // ─── Lite: auto scan loop ─────────────────────────────────
+    async function startFaceLoginCamera() {
+      if (!await startCamera("login-camera")) return;
+
+      const faceEl = document.getElementById("login-face-result");
+      if (faceEl) faceEl.innerText = "Scanning for your face...";
+
+      if (!autoFaceLoginInterval) {
+        autoFaceLoginInterval = setInterval(liteAutoScan, 2500);
+      }
+    }
+
+    async function liteAutoScan() {
+      if (faceLoginRunning) return;
+      faceLoginRunning = true;
+      try {
+        const data = await callFaceLoginWithStress("login-camera", "login-canvas", "lite");
+        if (!data) { faceLoginRunning = false; return; }
+
+        // Always update stress and name display
+        renderResult(data, "login-face-result", "login-stress-result", "lite-stress-bar", null);
+
+        // Only login automatically if recognised
+        if (data.success) {
+          clearInterval(autoFaceLoginInterval); autoFaceLoginInterval = null;
+          const video = document.getElementById("login-camera");
+          if (video && video.srcObject) { video.srcObject.getTracks().forEach(t => t.stop()); video.srcObject = null; }
+          localStorage.setItem("user", JSON.stringify(data.user));
+          setTimeout(() => { showStressConfirmModal("/home"); }, 1200);
+        }
+      } catch (err) { console.error("Lite auto scan error:", err); }
+      finally { faceLoginRunning = false; }
+    }
+
+    function stopLiteFaceLogin() {
+      if (autoFaceLoginInterval) { clearInterval(autoFaceLoginInterval); autoFaceLoginInterval = null; }
+      const video = document.getElementById("login-camera");
+      if (video && video.srcObject) { video.srcObject.getTracks().forEach(t => t.stop()); video.srcObject = null; }
+      if (video) video.parentElement.querySelector('.camera-placeholder').hidden = false;
+    }
+
+    // ─── Elite: continuous scan loop ──────────────────────────
+    async function eliteAutoScan() {
+      if (eliteRunning) return;
+      eliteRunning = true;
+      try {
+        const data = await callFaceLoginWithStress("elite-camera", "elite-canvas", "elite");
+        if (!data) { eliteRunning = false; return; }
+
+        renderResult(data, "elite-face-result", "elite-stress-label", "elite-stress-bar", "elite-emotion-label");
+
+        if (data.success) {
+          // Login automatically, but keep the stress panel updating briefly first
+          clearInterval(eliteInterval); eliteInterval = null;
+          const video = document.getElementById("elite-camera");
+          localStorage.setItem("user", JSON.stringify(data.user));
+          setTimeout(() => {
+            if (video && video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
+            showStressConfirmModal("/home");
+          }, 1500);
+        }
+      } catch (err) { console.error("Elite auto scan error:", err); }
+      finally { eliteRunning = false; }
+    }
+
+    // ─── Manual scan button (both modes) ──────────────────────
+    async function manualScan(mode) {
+      const btn = document.getElementById(mode === 'lite' ? 'face-login-btn' : 'elite-scan-btn');
+      if (btn) { btn.disabled = true; btn.innerText = "Scanning..."; }
+
+      try {
+        const videoId  = mode === 'lite' ? 'login-camera'  : 'elite-camera';
+        const canvasId = mode === 'lite' ? 'login-canvas'  : 'elite-canvas';
+        const data = await callFaceLoginWithStress(videoId, canvasId, mode);
+        if (!data) throw new Error("No response");
+
+        if (mode === 'lite') {
+          renderResult(data, "login-face-result", "login-stress-result", "lite-stress-bar", null);
+        } else {
+          renderResult(data, "elite-face-result", "elite-stress-label", "elite-stress-bar", "elite-emotion-label");
+        }
+
+        if (data.success) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          setTimeout(() => { showStressConfirmModal("/home"); }, 1200);
+        } else {
+          if (btn) { btn.disabled = false; btn.innerText = "🔍 Scan Now"; }
+        }
+      } catch (err) {
+        console.error("Manual scan error:", err);
+        if (btn) { btn.disabled = false; btn.innerText = "🔍 Scan Now"; }
+      }
+    }
+
+    // ─── On load ───────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      // Restore saved language
+      const saved = localStorage.getItem("mamatha_lang") || localStorage.getItem("siteLang") || "en";
+      const sel   = document.getElementById("login-language-selector");
+      if (sel && sel.querySelector(`option[value="${saved}"]`)) sel.value = saved;
+
+      // Camera starts only when the visitor opens the face sign-in panel.
+      showLogin(false);
+    });
+  </script>
+  <script src="/static/i18n.js"></script>
+  <script src="/static/landing.js"></script>
+</body>
+</html>
